@@ -1,4 +1,4 @@
-RESPONSIBLE:
+EventOwner:
 	- id
 	- name
 	- email
@@ -6,12 +6,13 @@ RESPONSIBLE:
 	- userType
 	- phone
 
-USER:
+AppUSER:
 	- id
 	- name
 	- email
 	- userType
 	- phone
+	- address
 
 EVENT:
 	- id
@@ -19,7 +20,7 @@ EVENT:
 	- description
 	- date
 	- addressID*
-	- responsibleID
+	- ownerID
 	- tagID*
 
 TAGS_IN_EVENTS:
