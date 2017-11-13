@@ -9,6 +9,7 @@ RESPONSIBLE:
 USER:
 	- id
 	- name
+	- email
 	- userType
 	- phone
 
