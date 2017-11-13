@@ -1,0 +1,46 @@
+RESPONSIBLE:
+	- id
+	- name
+	- email
+	- occupation
+	- userType
+	- phone
+
+USER:
+	- id
+	- name
+	- userType
+	- phone
+
+EVENT:
+	- id
+	- name
+	- description
+	- date
+	- addressID*
+	- responsibleID
+	- tagID*
+
+TAGS_IN_EVENTS:
+	- id
+	- eventId
+	- tagId
+
+TAGS:
+	- id
+	- name
+
+ADDRESS:
+	- id
+	- street
+	- number
+	- zipcode
+	- neighbor
+	- state
+	- country
+
+PATH: 
+	- id
+	- userID
+	- addressID
+	- date
