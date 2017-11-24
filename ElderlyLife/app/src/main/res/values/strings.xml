@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ElderlyForLife</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="register">Register Here</string>
+    <string name="title_activity_app">Elderly for Life</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="current_location_events">Events near Me</string>
+    <string name="favorite_events">Favorite Events</string>
+    <string name="next_events">Next Events</string>
+
+    <string name="settings">Settings</string>
+    <string name="updateAccount">Update Account</string>
+    <string name="addAddress">Add Addresss</string>
+    <string name="logout">Logout</string>
+</resources>
