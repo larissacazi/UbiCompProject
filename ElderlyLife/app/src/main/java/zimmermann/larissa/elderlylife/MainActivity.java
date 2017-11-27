@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import zimmermann.larissa.elderlylife.fragment.LoginFragment;
+import zimmermann.larissa.elderlylife.fragment.RegisterFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";

@@ -4,29 +4,35 @@ package zimmermann.larissa.elderlylife.Structure;
  * Created by laris on 23/11/2017.
  */
 
-public class Person {
+public class User {
+    private int id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String email;
-    private Address address;
+    private String lastLogin;
+    private String dateJoined;
+    private Boolean isStaff;
 
-    public Person(String username, String password, String firstName, String lastName, String email) {
+    public User(int id, String username, String password, String firstName, String lastName, String email, String lastLogin, String dateJoined, Boolean isStaff) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.lastLogin = lastLogin;
+        this.dateJoined = dateJoined;
+        this.isStaff = isStaff;
     }
 
-    public Person(String username, String password, String firstName, String lastName, String email, Address address) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.address = address;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -69,11 +75,27 @@ public class Person {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getLastLogin() {
+        return lastLogin;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public String getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDateJoined(String dateJoined) {
+        this.dateJoined = dateJoined;
+    }
+
+    public Boolean getStaff() {
+        return isStaff;
+    }
+
+    public void setStaff(Boolean staff) {
+        isStaff = staff;
     }
 }

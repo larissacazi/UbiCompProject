@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     //URL base do endpoint. Deve sempre terminar com /
-    public static final String API_BASE_URL = "https://dadosabertos.camara.leg.br/api/v2/";
+    public static final String API_BASE_URL = "http://elreact-rest.herokuapp.com/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {

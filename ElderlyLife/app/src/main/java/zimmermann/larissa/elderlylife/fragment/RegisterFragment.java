@@ -1,4 +1,4 @@
-package zimmermann.larissa.elderlylife;
+package zimmermann.larissa.elderlylife.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import zimmermann.larissa.elderlylife.MainActivity;
+import zimmermann.larissa.elderlylife.R;
 
 
 public class RegisterFragment extends Fragment {

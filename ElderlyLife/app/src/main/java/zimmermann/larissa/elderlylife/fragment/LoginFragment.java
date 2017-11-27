@@ -1,4 +1,4 @@
-package zimmermann.larissa.elderlylife;
+package zimmermann.larissa.elderlylife.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import zimmermann.larissa.elderlylife.AppActivity;
+import zimmermann.larissa.elderlylife.MainActivity;
+import zimmermann.larissa.elderlylife.R;
 
 
 public class LoginFragment extends Fragment {

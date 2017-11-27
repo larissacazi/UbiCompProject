@@ -5,20 +5,31 @@ package zimmermann.larissa.elderlylife.Structure;
  */
 
 public class Address {
+    private int id;
     private String street;
     private int number;
     private String neighbor;
     private String state;
     private String country;
     private String zipcode;
+    private Point point;
 
-    public Address(String street, int number, String neighbor, String state, String country, String zipcode) {
+    public Address(String street, int number, String neighbor, String state, String country, String zipcode, Point point) {
         this.street = street;
         this.number = number;
         this.neighbor = neighbor;
         this.state = state;
         this.country = country;
         this.zipcode = zipcode;
+        this.point = point;
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
     }
 
     public String getStreet() {
