@@ -7,8 +7,12 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import zimmermann.larissa.elderlylife.adapter.SectionsStatePagerAdapter;
+import zimmermann.larissa.elderlylife.fragment.AddressRegisterFragment;
+import zimmermann.larissa.elderlylife.fragment.AppUserRegisterFragment;
 import zimmermann.larissa.elderlylife.fragment.LoginFragment;
 import zimmermann.larissa.elderlylife.fragment.RegisterFragment;
+import zimmermann.larissa.elderlylife.fragment.UserTypeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new LoginFragment(), "LoginFragment"); //0
-        adapter.addFragment(new RegisterFragment(), "RegisterFragment"); //1
+        adapter.addFragment(new UserTypeFragment(), "UserTypeFragment"); //1
+        adapter.addFragment(new RegisterFragment(), "RegisterFragment"); //2
+        adapter.addFragment(new AppUserRegisterFragment(), "AppUserRegisterFragment"); //3
+        adapter.addFragment(new AddressRegisterFragment(), "AddressRegisterFragment"); //4
         //TODO Add more fragments
         //adapter.addFragment(new Fragment2(), "Fragment2");
         //adapter.addFragment(new Fragment3(), "Fragment3");

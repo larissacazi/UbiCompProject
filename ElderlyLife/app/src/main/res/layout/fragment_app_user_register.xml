@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,9 +5,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-
     <ImageView
-        android:id="@+id/imageView3"
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
@@ -18,7 +15,7 @@
         android:src="@drawable/logo2" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/registerID"
+        android:id="@+id/registerNextButtonID"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -29,7 +26,6 @@
         app:cardElevation="10dp">
 
         <RelativeLayout
-            android:id="@+id/loginButtonID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBaseline="@+id/textView2"
@@ -38,12 +34,11 @@
             android:layout_alignStart="@+id/cardView">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Register"
+                android:text="Next"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp" />
 
@@ -54,7 +49,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_above="@+id/registerID"
+        android:layout_above="@+id/registerNextButtonID"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="8dp">
@@ -65,7 +60,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/firstNameID"
+                android:id="@+id/firstNameUserID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -78,7 +73,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/lastNameID"
+                android:id="@+id/lastNameUserID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -92,7 +87,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/emailID"
+                android:id="@+id/emailUserID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -106,21 +101,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/occupationID"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:hint="Occupation"
-                android:inputType="textPersonName"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/phoneID"
+                android:id="@+id/phoneUserID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -134,7 +115,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/usernameID"
+                android:id="@+id/usernameUserID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -148,7 +129,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/passwordID"
+                android:id="@+id/passwordUserID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -162,7 +143,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/confirmPasswordTextID"
+                android:id="@+id/confirmPasswordUserID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -177,6 +158,5 @@
 
         </LinearLayout>
     </ScrollView>
-
 
 </RelativeLayout>

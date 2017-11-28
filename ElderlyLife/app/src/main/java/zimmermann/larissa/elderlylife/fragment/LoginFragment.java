@@ -1,8 +1,6 @@
 package zimmermann.larissa.elderlylife.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -13,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import zimmermann.larissa.elderlylife.AppActivity;
+import zimmermann.larissa.elderlylife.UserAppActivity;
 import zimmermann.larissa.elderlylife.MainActivity;
 import zimmermann.larissa.elderlylife.R;
 
@@ -50,7 +48,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 //TODO send the username and password
                 //TODO open the other activity
-                Intent intent = new Intent(getActivity(), AppActivity.class);
+                Intent intent = new Intent(getActivity(), UserAppActivity.class);
                 startActivity(intent);
             }
         });

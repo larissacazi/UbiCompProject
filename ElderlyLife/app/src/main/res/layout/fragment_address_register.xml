@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,9 +5,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-
     <ImageView
-        android:id="@+id/imageView3"
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
@@ -18,7 +15,7 @@
         android:src="@drawable/logo2" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/registerID"
+        android:id="@+id/addressRegisterButtonID"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -29,7 +26,6 @@
         app:cardElevation="10dp">
 
         <RelativeLayout
-            android:id="@+id/loginButtonID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBaseline="@+id/textView2"
@@ -38,7 +34,6 @@
             android:layout_alignStart="@+id/cardView">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -54,7 +49,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_above="@+id/registerID"
+        android:layout_above="@+id/addressRegisterButtonID"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="8dp">
@@ -62,23 +57,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/streetTextID"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:hint="Street"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/numberTextID"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:hint="Number"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
             <EditText
-                android:id="@+id/firstNameID"
+                android:id="@+id/neighborTextID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
+                android:ems="10"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:hint="First Name"
+                android:hint="Neighbor"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/lastNameID"
+                android:id="@+id/stateTextID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -86,13 +118,13 @@
                 android:ems="10"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:hint="Last Name"
+                android:hint="State"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/emailID"
+                android:id="@+id/countryTextID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -100,27 +132,13 @@
                 android:ems="10"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:hint="E-Mail"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/occupationID"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:hint="Occupation"
+                android:hint="Country"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/phoneID"
+                android:id="@+id/zipcodeTextID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -128,55 +146,12 @@
                 android:ems="10"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:hint="Phone Number"
-                android:inputType="phone"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/usernameID"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:hint="Username"
-                android:inputType="textPersonName"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/passwordID"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/confirmPasswordTextID"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"
+                android:hint="Zipcode"
+                android:inputType="number"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp" />
 
         </LinearLayout>
     </ScrollView>
-
 
 </RelativeLayout>
