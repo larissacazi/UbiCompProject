@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_addEvent"
+            android:icon="@drawable/ic_location_on_black_24dp"
+            android:title="@string/add_event" />
+        <item
+            android:id="@+id/nav_myEvent"
+            android:icon="@drawable/ic_event_available_black_24dp"
+            android:title="@string/show_my_events" />
+    </group>
+
+    <item android:title="@string/settings">
+        <menu>
+            <item
+                android:id="@+id/nav_updateAccount"
+                android:icon="@drawable/ic_account_box_black_24dp"
+                android:title="@string/updateAccount" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+
+</menu>

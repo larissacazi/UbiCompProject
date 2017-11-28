@@ -4,6 +4,7 @@ import zimmermann.larissa.elderlylife.Structure.AppUser;
 import zimmermann.larissa.elderlylife.Structure.EventListResponse;
 import zimmermann.larissa.elderlylife.Structure.OwnerUser;
 import zimmermann.larissa.elderlylife.Structure.Tag;
+import zimmermann.larissa.elderlylife.utils.Utils;
 
 /**
  * Created by laris on 28/11/2017.
@@ -13,7 +14,7 @@ public class AppDataSingleton {
     //User
     private AppUser appUser;
     private OwnerUser ownerUser;
-    private int userType; // 1 -> appUser, 2 -> ownerUser
+    private int userType = Utils.OWNER_USER; // 1 -> appUser, 2 -> ownerUser
 
     //Tag
     private Tag tags;

@@ -11,8 +11,11 @@
     <string name="action_settings">Settings</string>
 
     <string name="current_location_events">Events near Me</string>
-    <string name="favorite_events">Favorite Events</string>
     <string name="next_events">Next Events</string>
+    <string name="favorite_events">Favorite Events</string>
+
+    <string name="add_event">Add Event</string>
+    <string name="show_my_events">My Events</string>
 
     <string name="settings">Settings</string>
     <string name="updateAccount">Update Account</string>

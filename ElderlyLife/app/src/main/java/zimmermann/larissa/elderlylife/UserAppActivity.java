@@ -10,8 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import zimmermann.larissa.elderlylife.data.AppDataSingleton;
+import zimmermann.larissa.elderlylife.utils.Utils;
+
 public class UserAppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AppDataSingleton appData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,16 @@ public class UserAppActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        appData = AppDataSingleton.getInstace();
+        if(appData.getUserType() == Utils.APP_USER) {
+            navigationView.getMenu().clear(); //clear old inflated items.
+            navigationView.inflateMenu(R.menu.activity_app_drawer); //inflate new items.
+        }
+        else if(appData.getUserType() == Utils.OWNER_USER) {
+            navigationView.getMenu().clear(); //clear old inflated items.
+            navigationView.inflateMenu(R.menu.activity_owner_drawer); //inflate new items.
+        }
     }
 
     @Override
@@ -68,19 +83,34 @@ public class UserAppActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_eventsNearMe) {
-            // Handle the camera action
-        } else if (id == R.id.nav_nextEvents) {
+        if(appData.getUserType() == Utils.APP_USER) {
+            if (id == R.id.nav_eventsNearMe) {
+                // Handle the camera action
+            } else if (id == R.id.nav_nextEvents) {
 
-        } else if (id == R.id.nav_favoriteEvents) {
+            } else if (id == R.id.nav_favoriteEvents) {
 
-        } else if (id == R.id.nav_updateAccount) {
+            } else if (id == R.id.nav_updateAccount) {
 
-        } else if (id == R.id.nav_addAddress) {
+            } else if (id == R.id.nav_addAddress) {
 
-        } else if (id == R.id.nav_logout) {
+            } else if (id == R.id.nav_logout) {
 
+            }
         }
+        else if(appData.getUserType() == Utils.OWNER_USER) {
+            if (id == R.id.nav_addEvent) {
+                // Handle the camera action
+            } else if (id == R.id.nav_myEvent) {
+
+            } else if (id == R.id.nav_updateAccount) {
+
+            } else if (id == R.id.nav_logout) {
+
+            }
+        }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
