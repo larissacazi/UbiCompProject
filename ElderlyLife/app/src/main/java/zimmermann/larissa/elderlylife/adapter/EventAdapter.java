@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
+import zimmermann.larissa.elderlylife.R;
 import zimmermann.larissa.elderlylife.Structure.Event;
 
 /**
@@ -25,12 +27,28 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public static class EventViewHolder extends RecyclerView.ViewHolder{
 
         LinearLayout propsLayout;
-        TextView id, ano;
-        TextView ementa;
+        TextView eventName, eventDate, eventDescription;
+        ImageView eventButton;
+        boolean buttonPressed;
 
         public EventViewHolder(View v) {
             super(v);
 
+            eventName = (TextView) v.findViewById(R.id.eventNameTextID);
+            eventDate = (TextView) v.findViewById(R.id.eventDateID);
+            eventDescription = (TextView) v.findViewById(R.id.eventDescriptionID);
+            eventButton = (ImageView) v.findViewById(R.id.eventButtonID);
+            buttonPressed = false;
+
+            eventButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buttonPressed = !buttonPressed;
+
+                    if(buttonPressed == true) eventButton.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    else if(buttonPressed == false) eventButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                }
+            });
         }
     }
 
@@ -49,10 +67,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     @Override
     public void onBindViewHolder(final EventViewHolder holder, final int position) {
-
-        /*holder.ementa.setText(context.getString(R.string.propListEmenta) + props.get(position).getEmenta());
-        holder.id.setText(context.getString(R.string.propListCodigo) + String.valueOf(props.get(position).getId()));
-        holder.ano.setText(context.getString(R.string.propListAno) + String.valueOf(props.get(position).getAno()));*/
+        holder.eventName.setText(events.get(position).getName());
+        holder.eventDate.setText(events.get(position).getDate());
+        holder.eventDescription.setText(events.get(position).getDescription());
 
     }
 

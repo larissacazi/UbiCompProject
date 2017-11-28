@@ -2,6 +2,7 @@ package zimmermann.larissa.elderlylife;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -68,6 +69,11 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
             navigationView.inflateMenu(R.menu.activity_owner_drawer); //inflate new items.
         }
 
+        try {
+            loadEventList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -136,37 +142,25 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
             }
         }
 
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void loadPropsFromUrl(EventListResponse eventList) throws IOException {
-        //verifica aqui se o corpo da resposta não é nulo
-        if (eventList != null) {
+    private void loadEventList() throws IOException {
+        final List<Event> events = appData.getEventListResponse().getEvents();
 
-            final List<Event> events = eventList.getEvents();
+        recyclerView.removeOnItemTouchListener(recyclerTouchListener);
+        recyclerView.addOnItemTouchListener(recyclerTouchListener);
 
-            recyclerView.removeOnItemTouchListener(recyclerTouchListener);
-
-            //setPropTouchListener(events, recyclerView);
-
-            recyclerView.addOnItemTouchListener(recyclerTouchListener);
-
-            EventAdapter adapter = null;
-            if(appData.getUserType() == Utils.APP_USER) {
-                adapter = new EventAdapter(events, R.layout.event_component, getApplicationContext());
-            }
-            else if(appData.getUserType() == Utils.OWNER_USER) {
-                adapter = new EventAdapter(events, R.layout.event_owner_component, getApplicationContext());
-            }
-            if(adapter != null) recyclerView.setAdapter(adapter);
-
-        } else {
-            Toast.makeText(getApplicationContext(), "Resposta nula do servidor", Toast.LENGTH_SHORT).show();
+        EventAdapter adapter = null;
+        if(appData.getUserType() == Utils.APP_USER) {
+            adapter = new EventAdapter(events, R.layout.event_component, getApplicationContext());
         }
+        else if(appData.getUserType() == Utils.OWNER_USER) {
+            adapter = new EventAdapter(events, R.layout.event_owner_component, getApplicationContext());
+        }
+        if(adapter != null) recyclerView.setAdapter(adapter);
     }
 
     /*private void setPropTouchListener(final List<Event> events, final RecyclerView recyclerView){

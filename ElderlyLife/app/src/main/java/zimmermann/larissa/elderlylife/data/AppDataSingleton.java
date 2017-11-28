@@ -1,6 +1,15 @@
 package zimmermann.larissa.elderlylife.data;
 
+import android.support.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 import zimmermann.larissa.elderlylife.Structure.AppUser;
+import zimmermann.larissa.elderlylife.Structure.Event;
 import zimmermann.larissa.elderlylife.Structure.EventListResponse;
 import zimmermann.larissa.elderlylife.Structure.OwnerUser;
 import zimmermann.larissa.elderlylife.Structure.Tag;
@@ -26,6 +35,7 @@ public class AppDataSingleton {
     private static AppDataSingleton instance = null;
 
     private AppDataSingleton() {
+        fillEventList();
     }
 
     public static AppDataSingleton getInstace() {
@@ -74,5 +84,21 @@ public class AppDataSingleton {
 
     public void setEventListResponse(EventListResponse eventListResponse) {
         this.eventListResponse = eventListResponse;
+    }
+    
+    private void fillEventList() {
+        String name = "Forró de Natal";
+        String date = "14/12/2017";
+        String description = "Forró de Natal para a Terceira Idade. Compre seu ingresso: 20 reais para a melhor idade.";
+        
+        int i = 0;
+        List<Event> events = new ArrayList<Event>();
+        
+        for(i=0; i<20; i++) {
+            Event event = new Event(0, name, description, date, null, 0, null);
+            events.add(event);
+        }
+
+        this.eventListResponse =  new EventListResponse(events);
     }
 }
