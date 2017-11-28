@@ -14,7 +14,7 @@ public class AppDataSingleton {
     //User
     private AppUser appUser;
     private OwnerUser ownerUser;
-    private int userType = Utils.OWNER_USER; // 1 -> appUser, 2 -> ownerUser
+    private int userType = Utils.APP_USER; // 1 -> appUser, 2 -> ownerUser
 
     //Tag
     private Tag tags;
