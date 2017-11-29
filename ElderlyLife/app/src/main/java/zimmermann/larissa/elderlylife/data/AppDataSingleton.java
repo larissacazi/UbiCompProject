@@ -23,7 +23,7 @@ public class AppDataSingleton {
     //User
     private AppUser appUser;
     private OwnerUser ownerUser;
-    private int userType = Utils.APP_USER; // 1 -> appUser, 2 -> ownerUser
+    private int userType = Utils.OWNER_USER; // 1 -> appUser, 2 -> ownerUser
 
     //Tag
     private Tag tags;
@@ -94,7 +94,7 @@ public class AppDataSingleton {
         int i = 0;
         List<Event> events = new ArrayList<Event>();
         
-        for(i=0; i<20; i++) {
+        for(i=0; i<36; i++) {
             Event event = new Event(0, name, description, date, null, 0, null);
             events.add(event);
         }

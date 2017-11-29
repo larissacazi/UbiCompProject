@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -34,7 +35,6 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
 
     //ReciclerView
     private RecyclerView recyclerView;
-    private RecyclerTouchListener recyclerTouchListener;
     private DividerItemDecoration recyclerDecorator;
 
     @Override
@@ -55,6 +55,7 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
         recyclerDecorator = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(recyclerDecorator);
+        recyclerView.setHasFixedSize(false);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -124,9 +125,7 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
 
             } else if (id == R.id.nav_updateAccount) {
 
-            } else if (id == R.id.nav_addAddress) {
-
-            } else if (id == R.id.nav_logout) {
+            }  else if (id == R.id.nav_logout) {
 
             }
         }
@@ -150,9 +149,6 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
     private void loadEventList() throws IOException {
         final List<Event> events = appData.getEventListResponse().getEvents();
 
-        recyclerView.removeOnItemTouchListener(recyclerTouchListener);
-        recyclerView.addOnItemTouchListener(recyclerTouchListener);
-
         EventAdapter adapter = null;
         if(appData.getUserType() == Utils.APP_USER) {
             adapter = new EventAdapter(events, R.layout.event_component, getApplicationContext());
@@ -162,25 +158,4 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
         }
         if(adapter != null) recyclerView.setAdapter(adapter);
     }
-
-    /*private void setPropTouchListener(final List<Event> events, final RecyclerView recyclerView){
-        recyclerTouchListener = new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
-            //@Override
-            public void onClick(View view, int position) {
-                if(position < events.size()){
-                    Proposicao prop = events.get(position);
-                    Intent intent = new Intent(MainActivity.this, PropDetailsActivity.class);
-                    Bundle b = new Bundle();
-                    b.putInt("Id", prop.getId()); //Your id
-                    intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
-                }
-            }
-
-            //@Override
-            public void onLongClick(View view, int position) {
-
-            }
-        });
-    }*/
 }

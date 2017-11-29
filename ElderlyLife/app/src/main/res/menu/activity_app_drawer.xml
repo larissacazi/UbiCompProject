@@ -25,10 +25,6 @@
                 android:icon="@drawable/ic_account_box_black_24dp"
                 android:title="@string/updateAccount" />
             <item
-                android:id="@+id/nav_addAddress"
-                android:icon="@drawable/ic_local_offer_black_24dp"
-                android:title="@string/addAddress" />
-            <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
                 android:title="@string/logout" />

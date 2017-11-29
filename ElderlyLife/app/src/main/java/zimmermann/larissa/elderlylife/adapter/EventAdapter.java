@@ -2,17 +2,22 @@ package zimmermann.larissa.elderlylife.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import zimmermann.larissa.elderlylife.R;
 import zimmermann.larissa.elderlylife.Structure.Event;
+import zimmermann.larissa.elderlylife.data.AppDataSingleton;
+import zimmermann.larissa.elderlylife.utils.Utils;
 
 /**
  * Created by laris on 27/11/2017.
@@ -24,12 +29,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     private int rowLayout;
     private Context context;
 
-    public static class EventViewHolder extends RecyclerView.ViewHolder{
+    public static class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        LinearLayout propsLayout;
         TextView eventName, eventDate, eventDescription;
         ImageView eventButton;
-        boolean buttonPressed;
+        boolean pressedButton;
 
         public EventViewHolder(View v) {
             super(v);
@@ -38,17 +42,26 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             eventDate = (TextView) v.findViewById(R.id.eventDateID);
             eventDescription = (TextView) v.findViewById(R.id.eventDescriptionID);
             eventButton = (ImageView) v.findViewById(R.id.eventButtonID);
-            buttonPressed = false;
+            pressedButton = false;
 
-            eventButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    buttonPressed = !buttonPressed;
+            eventButton.setOnClickListener(this);
+        }
 
-                    if(buttonPressed == true) eventButton.setImageResource(R.drawable.ic_favorite_black_24dp);
-                    else if(buttonPressed == false) eventButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+        @Override
+        public void onClick(View v) {
+            if (AppDataSingleton.getInstace().getUserType() == Utils.APP_USER) {
+                if (pressedButton == false) {
+                    eventButton.setImageResource(R.drawable.ic_favorite_white_24dp);
+                    Toast.makeText(v.getContext(), "Event added to Favorite", Toast.LENGTH_SHORT).show();
+                } else if (pressedButton == true) {
+                    eventButton.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+                    Toast.makeText(v.getContext(), "Event removed from Favorite", Toast.LENGTH_SHORT).show();
                 }
-            });
+                pressedButton = !pressedButton;
+            } else if (AppDataSingleton.getInstace().getUserType() == Utils.OWNER_USER) {
+                //TODO Open Event Edit Window
+                Toast.makeText(v.getContext(), "Edit event clicked!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -66,11 +79,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     @Override
-    public void onBindViewHolder(final EventViewHolder holder, final int position) {
-        holder.eventName.setText(events.get(position).getName());
+    public void onBindViewHolder(final EventViewHolder holder, int position) {
+        holder.eventName.setText(String.valueOf(position) + " " + events.get(position).getName());
         holder.eventDate.setText(events.get(position).getDate());
         holder.eventDescription.setText(events.get(position).getDescription());
-
     }
 
     @Override
