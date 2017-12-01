@@ -1,11 +1,14 @@
 package zimmermann.larissa.elderlylife.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -94,4 +97,34 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public long getItemId(int position) {
         return events.get(position).getId();
     }
+
+   /* private void startEditEventDialog() {
+
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this.context);
+        builderSingle.setIcon(R.drawable.ic_event_available_black_24dp);
+        builderSingle.setTitle(R.string.edit_event);
+
+        final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this.context, android.R.layout.select_dialog_item);
+        for(int i = 0; i<currentYear - INITIAL_YEAR + 1; i++) {
+            arrayAdapter.add(currentYear - i);
+        }
+
+        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startLoading();
+                Integer year = arrayAdapter.getItem(which);
+                loadPropsByYear(year.intValue());
+            }
+        });
+        builderSingle.show();
+
+    }*/
 }

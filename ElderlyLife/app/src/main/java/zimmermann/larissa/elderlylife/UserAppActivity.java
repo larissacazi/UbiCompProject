@@ -11,15 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.util.List;
 
+import retrofit2.Call;
 import zimmermann.larissa.elderlylife.Structure.Event;
 import zimmermann.larissa.elderlylife.Structure.EventListResponse;
 import zimmermann.larissa.elderlylife.adapter.EventAdapter;
@@ -27,11 +31,13 @@ import zimmermann.larissa.elderlylife.data.AppDataSingleton;
 import zimmermann.larissa.elderlylife.recycler.ClickListener;
 import zimmermann.larissa.elderlylife.recycler.DividerItemDecoration;
 import zimmermann.larissa.elderlylife.recycler.RecyclerTouchListener;
+import zimmermann.larissa.elderlylife.service.RetrofitService;
+import zimmermann.larissa.elderlylife.service.ServiceGenerator;
 import zimmermann.larissa.elderlylife.utils.Utils;
 
 public class UserAppActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private AppDataSingleton appData;
+    private static final String TAG = "UserAppActivity";
 
     //ReciclerView
     private RecyclerView recyclerView;
@@ -60,12 +66,12 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        appData = AppDataSingleton.getInstace();
-        if(appData.getUserType() == Utils.APP_USER) {
+        Log.d(TAG, "UserType: " + AppDataSingleton.getInstace().getUserType());
+        if(AppDataSingleton.getInstace().getUserType() == Utils.APP_USER) {
             navigationView.getMenu().clear(); //clear old inflated items.
             navigationView.inflateMenu(R.menu.activity_app_drawer); //inflate new items.
         }
-        else if(appData.getUserType() == Utils.OWNER_USER) {
+        else if(AppDataSingleton.getInstace().getUserType() == Utils.OWNER_USER) {
             navigationView.getMenu().clear(); //clear old inflated items.
             navigationView.inflateMenu(R.menu.activity_owner_drawer); //inflate new items.
         }
@@ -116,7 +122,7 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(appData.getUserType() == Utils.APP_USER) {
+        if(AppDataSingleton.getInstace().getUserType() == Utils.APP_USER) {
             if (id == R.id.nav_eventsNearMe) {
 
             } else if (id == R.id.nav_nextEvents) {
@@ -126,10 +132,12 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
             } else if (id == R.id.nav_updateAccount) {
 
             }  else if (id == R.id.nav_logout) {
-
+                RetrofitService service = ServiceGenerator.getClient().create(RetrofitService.class);
+                service.logout();
+                finish();
             }
         }
-        else if(appData.getUserType() == Utils.OWNER_USER) {
+        else if(AppDataSingleton.getInstace().getUserType() == Utils.OWNER_USER) {
             if (id == R.id.nav_addEvent) {
                 // Handle the camera action
             } else if (id == R.id.nav_myEvent) {
@@ -137,7 +145,9 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
             } else if (id == R.id.nav_updateAccount) {
 
             } else if (id == R.id.nav_logout) {
-
+                RetrofitService service = ServiceGenerator.getClient().create(RetrofitService.class);
+                service.logout();
+                finish();
             }
         }
 
@@ -147,13 +157,13 @@ public class UserAppActivity extends AppCompatActivity implements NavigationView
     }
 
     private void loadEventList() throws IOException {
-        final List<Event> events = appData.getEventListResponse().getEvents();
+        final List<Event> events = AppDataSingleton.getInstace().getEventListResponse().getEvents();
 
         EventAdapter adapter = null;
-        if(appData.getUserType() == Utils.APP_USER) {
+        if(AppDataSingleton.getInstace().getUserType() == Utils.APP_USER) {
             adapter = new EventAdapter(events, R.layout.event_component, getApplicationContext());
         }
-        else if(appData.getUserType() == Utils.OWNER_USER) {
+        else if(AppDataSingleton.getInstace().getUserType() == Utils.OWNER_USER) {
             adapter = new EventAdapter(events, R.layout.event_owner_component, getApplicationContext());
         }
         if(adapter != null) recyclerView.setAdapter(adapter);

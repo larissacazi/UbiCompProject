@@ -8,23 +8,23 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String first_name;
+    private String last_name;
     private String email;
-    private String lastLogin;
-    private String dateJoined;
-    private Boolean isStaff;
+    private String last_login;
+    private String date_joined;
+    private Boolean is_staff;
 
-    public User(int id, String username, String password, String firstName, String lastName, String email, String lastLogin, String dateJoined, Boolean isStaff) {
+    public User(int id, String username, String password, String first_name, String last_name, String email, String last_login, String date_joined, Boolean is_staff) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
-        this.lastLogin = lastLogin;
-        this.dateJoined = dateJoined;
-        this.isStaff = isStaff;
+        this.last_login = last_login;
+        this.date_joined = date_joined;
+        this.is_staff = is_staff;
     }
 
     public int getId() {
@@ -51,20 +51,20 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {
@@ -75,27 +75,27 @@ public class User {
         this.email = email;
     }
 
-    public String getLastLogin() {
-        return lastLogin;
+    public String getLast_login() {
+        return last_login;
     }
 
-    public void setLastLogin(String lastLogin) {
-        this.lastLogin = lastLogin;
+    public void setLast_login(String last_login) {
+        this.last_login = last_login;
     }
 
-    public String getDateJoined() {
-        return dateJoined;
+    public String getDate_joined() {
+        return date_joined;
     }
 
-    public void setDateJoined(String dateJoined) {
-        this.dateJoined = dateJoined;
+    public void setDate_joined(String date_joined) {
+        this.date_joined = date_joined;
     }
 
-    public Boolean getStaff() {
-        return isStaff;
+    public Boolean getIs_staff() {
+        return is_staff;
     }
 
-    public void setStaff(Boolean staff) {
-        isStaff = staff;
+    public void setIs_staff(Boolean is_staff) {
+        this.is_staff = is_staff;
     }
 }

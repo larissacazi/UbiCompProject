@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new RegisterFragment(), "RegisterFragment"); //2
         adapter.addFragment(new AppUserRegisterFragment(), "AppUserRegisterFragment"); //3
         adapter.addFragment(new AddressRegisterFragment(), "AddressRegisterFragment"); //4
-        //TODO Add more fragments
-        //adapter.addFragment(new Fragment2(), "Fragment2");
-        //adapter.addFragment(new Fragment3(), "Fragment3");
         viewPager.setAdapter(adapter);
     }
 

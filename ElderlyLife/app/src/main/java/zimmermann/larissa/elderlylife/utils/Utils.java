@@ -9,8 +9,8 @@ import android.widget.EditText;
 
 public class Utils {
 
-    public static final int APP_USER = 1;
-    public static final int OWNER_USER = 2;
+    public static final int OWNER_USER = 1;
+    public static final int APP_USER = 2;
 
     public static boolean isEditTextEmpty(EditText editText) {
         String text = editText.getText().toString();

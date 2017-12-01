@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -124,9 +125,13 @@ public interface RetrofitService {
 
 //-------- Login --------//
 
-    @POST("paths")
+    @POST("login/")
+    @FormUrlEncoded
     Call<JsonObject> login(@Field("username") String username,
-                           @Field("password") String password); //Read Json Object
+                           @Field("password") String password);
+
+    @GET("logout/")
+    Call<JsonObject> logout();
 
 
 }
