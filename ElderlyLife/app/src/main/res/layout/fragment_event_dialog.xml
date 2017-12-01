@@ -108,6 +108,20 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/eventCityAddID"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="City"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
+
+            <EditText
                 android:id="@+id/eventNeighborAddID"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"

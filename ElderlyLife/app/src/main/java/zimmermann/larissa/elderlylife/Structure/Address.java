@@ -9,19 +9,30 @@ public class Address {
     private String street;
     private int number;
     private String neighbor;
+    private String city;
     private String state;
     private String country;
     private String zipcode;
     private Point point;
 
-    public Address(String street, int number, String neighbor, String state, String country, String zipcode, Point point) {
+    public Address(int id, String street, int number, String neighbor, String city, String state, String country, String zipcode, Point point) {
+        this.id = id;
         this.street = street;
         this.number = number;
         this.neighbor = neighbor;
+        this.city = city;
         this.state = state;
         this.country = country;
         this.zipcode = zipcode;
         this.point = point;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Point getPoint() {
