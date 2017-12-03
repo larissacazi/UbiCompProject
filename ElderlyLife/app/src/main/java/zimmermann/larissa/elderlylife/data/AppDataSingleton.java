@@ -20,6 +20,8 @@ import zimmermann.larissa.elderlylife.utils.Utils;
  */
 
 public class AppDataSingleton {
+
+    private String token;
     //User
     private AppUser appUser;
     private OwnerUser ownerUser;
@@ -35,7 +37,6 @@ public class AppDataSingleton {
     private static AppDataSingleton instance = null;
 
     private AppDataSingleton() {
-        fillEventList();
     }
 
     public static AppDataSingleton getInstace() {
@@ -85,20 +86,16 @@ public class AppDataSingleton {
     public void setEventListResponse(EventListResponse eventListResponse) {
         this.eventListResponse = eventListResponse;
     }
-    
-    private void fillEventList() {
-        String name = "Forró de Natal";
-        String date = "14/12/2017";
-        String description = "Forró de Natal para a Terceira Idade. Compre seu ingresso: 20 reais para a melhor idade.";
-        
-        int i = 0;
-        List<Event> events = new ArrayList<Event>();
-        
-        for(i=0; i<36; i++) {
-            Event event = new Event(0, name, description, date, null, 0, null);
-            events.add(event);
-        }
 
-        this.eventListResponse =  new EventListResponse(events);
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void clearInstace() {
+        instance = null;
     }
 }

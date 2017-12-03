@@ -1,6 +1,8 @@
 package zimmermann.larissa.elderlylife.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -13,15 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
 import zimmermann.larissa.elderlylife.Structure.AppUser;
+import zimmermann.larissa.elderlylife.Structure.OwnerUser;
 import zimmermann.larissa.elderlylife.UserAppActivity;
 import zimmermann.larissa.elderlylife.MainActivity;
 import zimmermann.larissa.elderlylife.R;
@@ -61,72 +61,76 @@ public class LoginFragment extends Fragment {
         cardLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO send the username and password
-                //TODO open the other activity
-                String username = usernameText.getText().toString();
-                String password = passwordText.getText().toString();
-
-
-                RetrofitService service = ServiceGenerator.getClient().create(RetrofitService.class);
-                Call<JsonObject> call = service.login(username, password);
-
-                call.enqueue(new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                        if (response.isSuccessful()) {
-                            JsonObject respostaServidor = response.body();
-                            //verifica aqui se o corpo da resposta não é nulo
-                            if (respostaServidor != null) {
-
-                                String mJsonString = respostaServidor.toString();
-                                JsonObject user = respostaServidor.getAsJsonObject("user");
-                                int userType = user.get("userType").getAsInt();
-                                Log.d(TAG, "userType = " + userType);
-                                Log.d(TAG, "JsonObject: " + mJsonString);
-                                Gson gson = new Gson();
-
-                                AppDataSingleton.getInstace().setUserType(userType);
-                                if(AppDataSingleton.getInstace().getUserType() == Utils.APP_USER) {
-                                    String userApp = respostaServidor.getAsJsonObject("user").toString();
-                                    AppUser appUser = gson.fromJson(userApp , AppUser.class);
-
-                                    Log.d(TAG, appUser.getId() + " " + appUser.getUser().getFirst_name() + " " + appUser.getResidentialAddress().getStreet());
-
-                                } else if(AppDataSingleton.getInstace().getUserType() == Utils.OWNER_USER) {
-                                    String ownerUser = user.getAsString();
-                                    AppUser appUser = gson.fromJson(ownerUser , AppUser.class);
-
-                                    Log.d(TAG, appUser.getId() + " " + appUser.getUser().getFirst_name() + " " + appUser.getResidentialAddress().getStreet());
-                                }
-
-                                Intent intent = new Intent(getActivity(), UserAppActivity.class);
-                                startActivity(intent);
-                               /* JsonParser parser = new JsonParser();
-                                JsonElement mJson =  parser.parse(mJsonString);
-                                Gson gson = new Gson();
-                                // MyDataObject object = gson.fromJson(mJson, MyDataObject.class);*/
-
-                            }else {
-
-                                Toast.makeText(getContext(), "Resposta nula do servidor", Toast.LENGTH_SHORT).show();
-                            }
-
-                        } else {
-
-                            Toast.makeText(getContext(), "Falha de comunicação", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
-
-                    }
-                });
+                login();
             }
         });
 
 
         return view;
+    }
+
+    private void login() {
+        String username = usernameText.getText().toString();
+        String password = passwordText.getText().toString();
+
+        RetrofitService service = ServiceGenerator.getClient().create(RetrofitService.class);
+        Call<JsonObject> call = service.login(username, password);
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                if (response.isSuccessful()) {
+                    JsonObject respostaServidor = response.body();
+                    //verifica aqui se o corpo da resposta não é nulo
+                    if (respostaServidor != null) {
+                        //Get Token
+                        String token = "Token " + respostaServidor.get("token").toString().replaceAll("[\"]", "");
+                        AppDataSingleton.getInstace().setToken(token);
+
+                        //Get User Type
+                        String mJsonString = respostaServidor.toString();
+                        JsonObject user = respostaServidor.getAsJsonObject("user");
+                        int userType = user.get("userType").getAsInt();
+                        Gson gson = new Gson();
+                        AppDataSingleton.getInstace().setUserType(userType);
+
+                        //Set User Object
+                        if(AppDataSingleton.getInstace().getUserType() == Utils.APP_USER) {
+                            String userApp = respostaServidor.getAsJsonObject("user").toString();
+                            AppUser appUser = gson.fromJson(userApp , AppUser.class);
+                            AppDataSingleton.getInstace().setAppUser(appUser);
+                            Log.d(TAG, appUser.getId() + " " + appUser.getUser().getFirst_name() + " " + appUser.getResidentialAddress().getStreet());
+
+                        } else if(AppDataSingleton.getInstace().getUserType() == Utils.OWNER_USER) {
+                            String userOwner = respostaServidor.getAsJsonObject("user").toString();
+                            OwnerUser ownerUser = gson.fromJson(userOwner , OwnerUser.class);
+                            AppDataSingleton.getInstace().setOwnerUser(ownerUser);
+                            Log.d(TAG, ownerUser.getId() + " " + ownerUser.getUser().getFirst_name() + " " + ownerUser.getOccupation());
+                        }
+
+                        //Start new Activity
+                        Intent intent = new Intent(getActivity(), UserAppActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                    }else {
+
+                        Toast.makeText(getContext(), "Resposta nula do servidor", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                    Toast.makeText(getContext(), "Falha de comunicação", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -1,5 +1,8 @@
 package zimmermann.larissa.elderlylife.service;
 
+import android.media.session.MediaSession;
+import android.support.v4.media.session.MediaSessionCompat;
+
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -8,6 +11,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -31,97 +35,98 @@ public interface RetrofitService {
 
 //-------- Address --------//
     @GET("addresses/")
-    Call<AddressesListResponse> getAllAddress();
+    Call<AddressesListResponse> getAllAddress(@Header("authorization") String token);
 
     @POST("addresses/")
-    Call<Address> createNewAddress(@Body Address address);
+    Call<Address> createNewAddress(@Header("authorization") String token,
+                                    @Body Address address);
 
     @GET("addresses/{id}")
-    Call<AddressesListResponse> getAddressesByID(@Path("id") int id);
+    Call<AddressesListResponse> getAddressesByID(@Header("authorization") String token, @Path("id") int id);
 
     @PUT("addresses/{id}")
-    Call<Address> editAddressByID(@Path("id") int id, @Body Address address);
+    Call<Address> editAddressByID(@Header("authorization") String token, @Path("id") int id, @Body Address address);
 
     @DELETE("addresses/{id}")
-    Call<Address> deleteAddressByID(@Path("id") int id);
+    Call<Address> deleteAddressByID(@Header("authorization") String token, @Path("id") int id);
 
 //-------- Events --------//
-    @GET("events")
-    Call<EventListResponse> getAllEvents();
+    @GET("events/")
+    Call<EventListResponse> getAllEvents(@Header("Authorization") String token);
 
-    @GET("events")
-    Call<EventListResponse> getEventsNearMe(@Query("residential") boolean residential);
+    @GET("events/")
+    Call<EventListResponse> getEventsNearMe(@Header("authorization") String token, @Query("residential") boolean residential);
 
-    @GET("events")
-    Call<EventListResponse> getEventsNearFromPath(@Query("path") boolean path);
+    @GET("events/")
+    Call<EventListResponse> getEventsNearFromPath(@Header("authorization") String token, @Query("path") boolean path);
 
-    @GET("events")
-    Call<EventListResponse> getEventsNearCoordinate(@Query("current") boolean current,
+    @GET("events/")
+    Call<EventListResponse> getEventsNearCoordinate(@Header("authorization") String token, @Query("current") boolean current,
                                                     @Field("lat") double lat,
                                                     @Field("long") double longitude);
 
     @GET("events")
-    Call<EventListResponse> getEventsByOwnerID(@Query("owner") int ownerID);
+    Call<EventListResponse> getEventsByOwnerID(@Header("authorization") String token, @Query("owner") int ownerID);
 
     @GET("events/{id}")
-    Call<Event> getEventByID(@Path("id") int id);
+    Call<Event> getEventByID(@Header("authorization") String token, @Path("id") int id);
 
     @PUT("events/{id}")
-    Call<Event> editEventByID(@Path("id") int id, @Body Event event);
+    Call<Event> editEventByID(@Header("authorization") String token, @Path("id") int id, @Body Event event);
 
     @DELETE("events/{id}")
-    Call<Event> deleteEventByID(@Path("id") int id);
+    Call<Event> deleteEventByID(@Header("authorization") String token, @Path("id") int id);
 
 //-------- Event Owners --------//
 
     @GET("event-owners")
-    Call<OwnerUserListResponse> getAllOwnerUsers();
+    Call<OwnerUserListResponse> getAllOwnerUsers(@Header("authorization") String token);
 
     @POST("event-owners")
-    Call<OwnerUser> createNewOwnerUser(@Body OwnerUser ownerUser);
+    Call<OwnerUser> createNewOwnerUser(@Header("authorization") String token, @Body OwnerUser ownerUser);
 
     @GET("event-owners/{id}")
-    Call<OwnerUser> getOwnerUserByID(@Path("id") int id);
+    Call<OwnerUser> getOwnerUserByID(@Header("authorization") String token, @Path("id") int id);
 
     @PUT("event-owners/{id}")
-    Call<OwnerUser> editOwnerUserByID(@Path("id") int id, @Body OwnerUser ownerUser);
+    Call<OwnerUser> editOwnerUserByID(@Header("authorization") String token, @Path("id") int id, @Body OwnerUser ownerUser);
 
     @DELETE("event-owner/{id}")
-    Call<OwnerUser> deleteOwnerUSerByID(@Path("id") int id);
+    Call<OwnerUser> deleteOwnerUSerByID(@Header("authorization") String token, @Path("id") int id);
 
 //-------- App Users --------//
 
     @GET("app-users")
-    Call<AppUsersListResponse> getAllAppUsers();
+    Call<AppUsersListResponse> getAllAppUsers(@Header("authorization") String token);
 
     @POST("app-users")
-    Call<AppUser> createNewAppUser(@Body AppUser appUser);
+    Call<AppUser> createNewAppUser(@Header("authorization") String token, @Body AppUser appUser);
 
     @GET("app-users/{id}")
-    Call<AppUser> getAppUserByID(@Path("id") int id);
+    Call<AppUser> getAppUserByID(@Header("authorization") String token, @Path("id") int id);
 
     @PUT("app-users/{id}")
-    Call<AppUser> editAppUserByID(@Path("id") int id, @Body AppUser appUser);
+    Call<AppUser> editAppUserByID(@Header("authorization") String token, @Path("id") int id, @Body AppUser appUser);
 
     @DELETE("app-users/{id}")
-    Call<AppUser> deleteAppUserByID(@Path("id") int id);
+    Call<AppUser> deleteAppUserByID(@Header("authorization") String token, @Path("id") int id);
 
 //-------- UserPath --------//
 
     @GET("paths")
-    Call<UserPathListResponse> getAllPaths();
+    Call<UserPathListResponse> getAllPaths(@Header("authorization") String token);
 
     @POST("paths")
-    Call<UserPath> createNewUserPath(@Body UserPath userPath);
+    Call<UserPath> createNewUserPath(@Header("authorization") String token, @Body UserPath userPath);
 
     @GET("paths/{id}")
-    Call<UserPath> getUserPathByID(@Path("id") int id);
+    Call<UserPath> getUserPathByID(@Header("authorization") String token, @Path("id") int id);
 
     @PUT("paths/{id}")
-    Call<UserPath> editUserPathByID(@Path("id") int id, @Body UserPath userPath);
+    Call<UserPath> editUserPathByID(@Header("authorization") String token, @Path("id") int id, @Body UserPath userPath);
 
     @DELETE("paths/{id}")
-    Call<UserPath> deleteUserPathByID(@Path("id") int id);
+    Call<UserPath> deleteUserPathByID(@Header("authorization") String token, @Path("id") int id);
 
 //-------- Login --------//
 
@@ -131,7 +136,7 @@ public interface RetrofitService {
                            @Field("password") String password);
 
     @GET("logout/")
-    Call<JsonObject> logout();
+    Call<JsonObject> logout(@Header("Authorization") String token);
 
 
 }
