@@ -5,6 +5,7 @@ import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -31,10 +32,11 @@ public class Utils {
         return false;
     }
 
-    public static String getDatePrintableFormat(String date) throws ParseException {
-        Date dateVerify = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
-
-        String newDate = dateVerify.getDay() + "/" + dateVerify.getMonth() + "/" + dateVerify.getYear();
+    public static String getDatePrintableFormat(String date) {
+        String modDate = date;
+        String[] parts = modDate.split("T");
+        String[] dateNew = parts[0].split("-");
+        String newDate = dateNew[2] + "/" + dateNew[1] + "/" + dateNew[0];
 
         return newDate;
     }
