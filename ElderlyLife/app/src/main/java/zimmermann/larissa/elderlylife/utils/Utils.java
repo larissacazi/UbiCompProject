@@ -3,6 +3,10 @@ package zimmermann.larissa.elderlylife.utils;
 import android.text.TextUtils;
 import android.widget.EditText;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by laris on 27/11/2017.
  */
@@ -25,5 +29,13 @@ public class Utils {
         if(pwd.matches(confirmPwd)) return true;
 
         return false;
+    }
+
+    public static String getDatePrintableFormat(String date) throws ParseException {
+        Date dateVerify = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+
+        String newDate = dateVerify.getDay() + "/" + dateVerify.getMonth() + "/" + dateVerify.getYear();
+
+        return newDate;
     }
 }

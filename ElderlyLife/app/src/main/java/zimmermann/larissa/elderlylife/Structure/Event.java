@@ -11,11 +11,11 @@ public class Event {
     private String name;
     private String description;
     private String date;
-    private Address address;
+    private List<Address> address;
     private int owner; //Owner id, who created the event
     private List<Tag> tags;
 
-    public Event(int id, String name, String description, String date, Address address, int owner, List<Tag> tags) {
+    public Event(int id, String name, String description, String date, List<Address> address, int owner, List<Tag> tags) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -57,11 +57,11 @@ public class Event {
         this.date = date;
     }
 
-    public Address getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
 

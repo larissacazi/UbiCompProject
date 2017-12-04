@@ -6,13 +6,13 @@ package zimmermann.larissa.elderlylife.Structure;
 
 public class Address {
     private int id;
+    private String zipcode;
     private String street;
     private int number;
     private String neighbor;
     private String city;
     private String state;
     private String country;
-    private String zipcode;
     private Point point;
 
     public Address(int id, String street, int number, String neighbor, String city, String state, String country, String zipcode, Point point) {

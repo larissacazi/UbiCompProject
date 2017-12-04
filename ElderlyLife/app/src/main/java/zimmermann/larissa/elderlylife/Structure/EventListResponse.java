@@ -7,17 +7,17 @@ import java.util.List;
  */
 
 public class EventListResponse {
-    private List<Event> events;
+    private List<Event> data;
 
     public EventListResponse(List<Event> events) {
-        this.events = events;
+        this.data = events;
     }
 
     public List<Event> getEvents() {
-        return events;
+        return data;
     }
 
     public void setEvents(List<Event> events) {
-        this.events = events;
+        this.data = events;
     }
 }

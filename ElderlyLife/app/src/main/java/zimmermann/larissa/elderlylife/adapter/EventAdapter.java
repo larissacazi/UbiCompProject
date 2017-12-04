@@ -14,9 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import zimmermann.larissa.elderlylife.R;
 import zimmermann.larissa.elderlylife.Structure.Event;
 import zimmermann.larissa.elderlylife.data.AppDataSingleton;
@@ -83,13 +85,20 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     @Override
     public void onBindViewHolder(final EventViewHolder holder, int position) {
-        holder.eventName.setText(String.valueOf(position) + " " + events.get(position).getName());
-        holder.eventDate.setText(events.get(position).getDate());
+        holder.eventName.setText(events.get(position).getName());
+        try {
+            String date = Utils.getDatePrintableFormat(events.get(position).getDate());
+            holder.eventDate.setText(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         holder.eventDescription.setText(events.get(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
+        if(events == null) return 0;
         return events.size();
     }
 
