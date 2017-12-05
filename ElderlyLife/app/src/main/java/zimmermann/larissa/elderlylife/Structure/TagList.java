@@ -9,6 +9,10 @@ import java.util.List;
 public class TagList {
     private List<Tag> data;
 
+    public TagList(List<Tag> data) {
+        this.data = data;
+    }
+
     public List<Tag> getData() {
         return data;
     }

@@ -114,7 +114,7 @@ public class LoginFragment extends Fragment {
                         }
 
                         //Start new Activity
-                        Intent intent = new Intent(getContext(), UserAppActivity.class);
+                        Intent intent = new Intent(getActivity(), UserAppActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

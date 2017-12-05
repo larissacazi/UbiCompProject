@@ -57,63 +57,29 @@ public class AddEventFragment extends Fragment {
         eventHour = (EditText)view.findViewById(R.id.eventHourID);
         eventSpinner = (Spinner)view.findViewById(R.id.eventSpinnerID);
 
-        if(AppDataSingleton.getInstace().getTags() == null) {
-            loadTags();
-        }
-        else{
-            //TODO ADD TAGS TO SPINNER
-        }
+        loadTags();
 
         return view;
     }
 
     private void loadTags() {
-        String token = AppDataSingleton.getInstace().getToken();
-        RetrofitService service = ServiceGenerator.getClient().create(RetrofitService.class);
-        Call<TagList> call = service.getAllTags(token);
+        TagList tagList = new TagList(AppDataSingleton.getInstace().getTags());
 
-        call.enqueue(new Callback<TagList>() {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.itemText);
+        arrayAdapter.add("Select Tag Type");
+        for(int i = 0; i<tagList.getData().size(); i++) {
+            String spinnerItem = tagList.getData().get(i).getName();
+            arrayAdapter.add(spinnerItem);
+        }
+
+        arrayAdapter.sort(new Comparator<String>() {
             @Override
-            public void onResponse(Call<TagList> call, Response<TagList> response) {
-
-                if (response.isSuccessful()) {
-                    TagList tagList = response.body();
-                    if(tagList != null) {
-
-                        AppDataSingleton.getInstace().setTags(tagList.getData());
-
-                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.itemText);
-                        for(int i = 0; i<tagList.getData().size(); i++) {
-                            String spinnerItem = tagList.getData().get(i).getName();
-                            arrayAdapter.add(spinnerItem);
-                        }
-
-                        arrayAdapter.sort(new Comparator<String>() {
-                            @Override
-                            public int compare(String arg1, String arg0) {
-                                return arg1.compareTo(arg0);
-                            }
-                        });
-
-                        eventSpinner.setAdapter(arrayAdapter);
-
-                    }else {
-
-                        Toast.makeText(getContext(), "Resposta nula do servidor", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-
-                    Toast.makeText(getContext(), "Falha de comunicação", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TagList> call, Throwable t) {
-                Toast.makeText(getContext(), "Falha!!!", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, t.getMessage());
+            public int compare(String arg1, String arg0) {
+                return arg1.compareTo(arg0);
             }
         });
+
+        eventSpinner.setAdapter(arrayAdapter);
     }
 
 }
