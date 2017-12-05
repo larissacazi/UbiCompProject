@@ -25,6 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import zimmermann.larissa.elderlylife.Structure.Event;
 import zimmermann.larissa.elderlylife.Structure.EventListResponse;
+import zimmermann.larissa.elderlylife.Structure.TagList;
 import zimmermann.larissa.elderlylife.adapter.EventAdapter;
 import zimmermann.larissa.elderlylife.data.AppDataSingleton;
 import zimmermann.larissa.elderlylife.recycler.DividerItemDecoration;
@@ -73,6 +74,8 @@ public class UserAppActivity extends AppCompatActivity
             navigationView.getMenu().clear(); //clear old inflated items.
             navigationView.inflateMenu(R.menu.activity_owner_drawer); //inflate new items.
         }
+
+        loadTags();
     }
 
     @Override
@@ -133,7 +136,8 @@ public class UserAppActivity extends AppCompatActivity
         }
         else if(AppDataSingleton.getInstace().getUserType() == Utils.OWNER_USER) {
             if (id == R.id.nav_addEvent) {
-                // Handle the camera action
+                Intent intent = new Intent(getApplicationContext(), AddEventActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_myEvent) {
 
             } else if (id == R.id.nav_updateAccount) {
@@ -206,7 +210,37 @@ public class UserAppActivity extends AppCompatActivity
                 Log.d(TAG, t.getMessage());
             }
         });
+    }
 
-        Log.d(TAG, "PAssou...");
+    private void loadTags() {
+        String token = AppDataSingleton.getInstace().getToken();
+        RetrofitService service = ServiceGenerator.getClient().create(RetrofitService.class);
+        Call<TagList> call = service.getAllTags(token);
+
+        call.enqueue(new Callback<TagList>() {
+            @Override
+            public void onResponse(Call<TagList> call, Response<TagList> response) {
+
+                if (response.isSuccessful()) {
+                    TagList tagList = response.body();
+                    if(tagList != null) {
+                        AppDataSingleton.getInstace().setTags(tagList.getData());
+                    }else {
+
+                        Toast.makeText(getApplicationContext(), "Resposta nula do servidor", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Falha de comunicação", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TagList> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Falha!!!", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, t.getMessage());
+            }
+        });
     }
 }

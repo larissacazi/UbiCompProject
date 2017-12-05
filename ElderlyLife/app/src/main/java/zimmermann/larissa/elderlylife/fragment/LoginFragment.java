@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,11 +18,14 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.util.Comparator;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import zimmermann.larissa.elderlylife.Structure.AppUser;
 import zimmermann.larissa.elderlylife.Structure.OwnerUser;
+import zimmermann.larissa.elderlylife.Structure.TagList;
 import zimmermann.larissa.elderlylife.UserAppActivity;
 import zimmermann.larissa.elderlylife.MainActivity;
 import zimmermann.larissa.elderlylife.R;
@@ -104,13 +108,13 @@ public class LoginFragment extends Fragment {
 
                         } else if(AppDataSingleton.getInstace().getUserType() == Utils.OWNER_USER) {
                             String userOwner = respostaServidor.getAsJsonObject("user").toString();
-                            OwnerUser ownerUser = gson.fromJson(userOwner , OwnerUser.class);
+                            OwnerUser ownerUser = gson.fromJson(userOwner, OwnerUser.class);
                             AppDataSingleton.getInstace().setOwnerUser(ownerUser);
                             Log.d(TAG, ownerUser.getId() + " " + ownerUser.getUser().getFirst_name() + " " + ownerUser.getOccupation());
                         }
 
                         //Start new Activity
-                        Intent intent = new Intent(getActivity(), UserAppActivity.class);
+                        Intent intent = new Intent(getContext(), UserAppActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

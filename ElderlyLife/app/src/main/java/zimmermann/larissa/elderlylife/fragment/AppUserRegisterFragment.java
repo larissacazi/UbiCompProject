@@ -11,8 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import okhttp3.internal.Util;
 import zimmermann.larissa.elderlylife.MainActivity;
 import zimmermann.larissa.elderlylife.R;
+import zimmermann.larissa.elderlylife.Structure.Address;
+import zimmermann.larissa.elderlylife.Structure.AppUser;
+import zimmermann.larissa.elderlylife.Structure.User;
+import zimmermann.larissa.elderlylife.Structure.UserType;
+import zimmermann.larissa.elderlylife.data.AppDataSingleton;
 import zimmermann.larissa.elderlylife.utils.Utils;
 
 public class AppUserRegisterFragment extends Fragment {
@@ -77,6 +83,12 @@ public class AppUserRegisterFragment extends Fragment {
                     confirmPasswordText.setError("Passwords must have at leat 6 characters");
                 }
                 else {
+                    User user = new User(0, usernameText.getText().toString(),
+                            passwordText.getText().toString(), firstNameText.getText().toString(),
+                            lastNameText.getText().toString(), emailText.getText().toString(),
+                            " ", " ", false);
+
+                    AppDataSingleton.getInstace().setAppUser(new AppUser(0, user, Utils.APP_USER, phoneText.getText().toString(), new Address()));
                     ((MainActivity)getActivity()).setViewPager(4); //Login Fragment
                 }
             }

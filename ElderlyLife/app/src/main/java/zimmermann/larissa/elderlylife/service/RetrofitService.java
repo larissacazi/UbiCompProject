@@ -1,9 +1,8 @@
 package zimmermann.larissa.elderlylife.service;
 
-import android.media.session.MediaSession;
-import android.support.v4.media.session.MediaSessionCompat;
-
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,6 +23,8 @@ import zimmermann.larissa.elderlylife.Structure.Event;
 import zimmermann.larissa.elderlylife.Structure.EventListResponse;
 import zimmermann.larissa.elderlylife.Structure.OwnerUser;
 import zimmermann.larissa.elderlylife.Structure.OwnerUserListResponse;
+import zimmermann.larissa.elderlylife.Structure.Tag;
+import zimmermann.larissa.elderlylife.Structure.TagList;
 import zimmermann.larissa.elderlylife.Structure.UserPathListResponse;
 import zimmermann.larissa.elderlylife.Structure.UserPath;
 
@@ -79,11 +80,11 @@ public interface RetrofitService {
 
 //-------- Event Owners --------//
 
-    @GET("event-owners")
+    @GET("event-owners/")
     Call<OwnerUserListResponse> getAllOwnerUsers(@Header("authorization") String token);
 
-    @POST("event-owners")
-    Call<OwnerUser> createNewOwnerUser(@Header("authorization") String token, @Body OwnerUser ownerUser);
+    @POST("event-owners/")
+    Call<OwnerUser> createNewOwnerUser(@Body OwnerUser ownerUser);
 
     @GET("event-owners/{id}")
     Call<OwnerUser> getOwnerUserByID(@Header("authorization") String token, @Path("id") int id);
@@ -96,11 +97,11 @@ public interface RetrofitService {
 
 //-------- App Users --------//
 
-    @GET("app-users")
+    @GET("app-users/")
     Call<AppUsersListResponse> getAllAppUsers(@Header("authorization") String token);
 
-    @POST("app-users")
-    Call<AppUser> createNewAppUser(@Header("authorization") String token, @Body AppUser appUser);
+    @POST("app-users/")
+    Call<AppUser> createNewAppUser(@Body AppUser appUser);
 
     @GET("app-users/{id}")
     Call<AppUser> getAppUserByID(@Header("authorization") String token, @Path("id") int id);
@@ -137,6 +138,10 @@ public interface RetrofitService {
 
     @GET("logout/")
     Call<JsonObject> logout(@Header("Authorization") String token);
+
+//-------- Tags --------//
+    @GET("tags/")
+    Call<TagList> getAllTags(@Header("authorization") String token);
 
 
 }

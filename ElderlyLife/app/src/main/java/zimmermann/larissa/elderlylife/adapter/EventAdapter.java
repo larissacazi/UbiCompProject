@@ -103,33 +103,4 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return events.get(position).getId();
     }
 
-   /* private void startEditEventDialog() {
-
-        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this.context);
-        builderSingle.setIcon(R.drawable.ic_event_available_black_24dp);
-        builderSingle.setTitle(R.string.edit_event);
-
-        final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this.context, android.R.layout.select_dialog_item);
-        for(int i = 0; i<currentYear - INITIAL_YEAR + 1; i++) {
-            arrayAdapter.add(currentYear - i);
-        }
-
-        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startLoading();
-                Integer year = arrayAdapter.getItem(which);
-                loadPropsByYear(year.intValue());
-            }
-        });
-        builderSingle.show();
-
-    }*/
 }

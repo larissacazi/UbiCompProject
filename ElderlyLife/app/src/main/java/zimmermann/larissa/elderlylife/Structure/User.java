@@ -15,6 +15,9 @@ public class User {
     private String date_joined;
     private Boolean is_staff;
 
+    public User() {
+    }
+
     public User(int id, String username, String password, String first_name, String last_name, String email, String last_login, String date_joined, Boolean is_staff) {
         this.id = id;
         this.username = username;

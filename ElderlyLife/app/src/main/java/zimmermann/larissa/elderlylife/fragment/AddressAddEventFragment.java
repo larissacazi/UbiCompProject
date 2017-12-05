@@ -1,11 +1,9 @@
 package zimmermann.larissa.elderlylife.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,24 +11,20 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import zimmermann.larissa.elderlylife.MainActivity;
 import zimmermann.larissa.elderlylife.R;
 import zimmermann.larissa.elderlylife.Structure.AppUser;
-import zimmermann.larissa.elderlylife.Structure.OwnerUser;
-import zimmermann.larissa.elderlylife.UserAppActivity;
 import zimmermann.larissa.elderlylife.data.AppDataSingleton;
 import zimmermann.larissa.elderlylife.service.RetrofitService;
 import zimmermann.larissa.elderlylife.service.ServiceGenerator;
 import zimmermann.larissa.elderlylife.utils.Utils;
 
 
-public class AddressRegisterFragment extends Fragment {
+public class AddressAddEventFragment extends Fragment {
 
     private static final String TAG = "AddressRegisterFragment";
 
@@ -45,7 +39,7 @@ public class AddressRegisterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.fragment_address_register, container, false);
+        View view  = inflater.inflate(R.layout.fragment_address_add_event, container, false);
 
         cardRegisterButton = (CardView)view.findViewById(R.id.addressRegisterButtonID);
         streetText = (EditText)view.findViewById(R.id.streetTextID);
@@ -92,10 +86,9 @@ public class AddressRegisterFragment extends Fragment {
                     AppDataSingleton.getInstace().getAppUser().getResidentialAddress().setZipcode(zipcodeText.getText().toString());
 
                     //Send this AppUser to server
-                    uploadAppUser();
+                    uploadEvent();
 
-                    //Call other fragment
-                    ((MainActivity)getActivity()).setViewPager(0); //Login Fragment
+                    //Close Activity
                 }
             }
         });
@@ -103,7 +96,7 @@ public class AddressRegisterFragment extends Fragment {
         return view;
     }
 
-    private void uploadAppUser() {
+    private void uploadEvent() {//TODO Change this function
         RetrofitService service = ServiceGenerator.getClient().create(RetrofitService.class);
         Call<AppUser> call = service.createNewAppUser(AppDataSingleton.getInstace().getAppUser());
 

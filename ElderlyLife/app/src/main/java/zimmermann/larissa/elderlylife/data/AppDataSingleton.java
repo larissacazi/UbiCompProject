@@ -28,7 +28,7 @@ public class AppDataSingleton {
     private int userType; // 1 -> appUser, 2 -> ownerUser
 
     //Tag
-    private Tag tags;
+    private List<Tag> tags;
 
     //Event
     private EventListResponse eventListResponse;
@@ -71,11 +71,11 @@ public class AppDataSingleton {
         this.userType = userType;
     }
 
-    public Tag getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(Tag tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 

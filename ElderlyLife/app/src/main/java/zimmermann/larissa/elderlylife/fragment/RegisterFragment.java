@@ -10,9 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import zimmermann.larissa.elderlylife.MainActivity;
 import zimmermann.larissa.elderlylife.R;
+import zimmermann.larissa.elderlylife.Structure.Address;
+import zimmermann.larissa.elderlylife.Structure.AppUser;
+import zimmermann.larissa.elderlylife.Structure.OwnerUser;
+import zimmermann.larissa.elderlylife.Structure.User;
+import zimmermann.larissa.elderlylife.Structure.UserType;
+import zimmermann.larissa.elderlylife.data.AppDataSingleton;
+import zimmermann.larissa.elderlylife.service.RetrofitService;
+import zimmermann.larissa.elderlylife.service.ServiceGenerator;
 import zimmermann.larissa.elderlylife.utils.Utils;
 
 
@@ -85,6 +97,16 @@ public class RegisterFragment extends Fragment {
                     confirmPasswordText.setError("Passwords must have at leat 6 characters");
                 }
                 else {
+                    User user = new User(0, usernameText.getText().toString(),
+                            passwordText.getText().toString(), firstNameText.getText().toString(),
+                            lastNameText.getText().toString(), emailText.getText().toString(),
+                            " ", " ", false);
+
+                    AppDataSingleton.getInstace().setOwnerUser(new OwnerUser(0, user, occupationText.getText().toString(), Utils.OWNER_USER, phoneText.getText().toString()));
+
+                    //Send this AppUser to server
+                    uploadOwnerUser();
+
                     ((MainActivity)getActivity()).setViewPager(0); //Login Fragment
                 }
             }
@@ -94,5 +116,40 @@ public class RegisterFragment extends Fragment {
         return view;
     }
 
+    private void uploadOwnerUser() {
+        RetrofitService service = ServiceGenerator.getClient().create(RetrofitService.class);
+        Call<OwnerUser> call = service.createNewOwnerUser(AppDataSingleton.getInstace().getOwnerUser());
+
+        call.enqueue(new Callback<OwnerUser>() {
+            @Override
+            public void onResponse(Call<OwnerUser> call, Response<OwnerUser> response) {
+
+                boolean answer = response.isSuccessful();
+
+                if (response.isSuccessful()) {
+                    OwnerUser respostaServidor = response.body();
+                    //verifica aqui se o corpo da resposta não é nulo
+                    if (respostaServidor != null) {
+                        //Get Token
+                        Log.d(TAG, "Resposta servidor foi recebida!");
+
+                    }else {
+
+                        Toast.makeText(getContext(), "Resposta nula do servidor", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                    Toast.makeText(getContext(), "Falha de comunicação", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OwnerUser> call, Throwable t) {
+                Toast.makeText(getContext(), "Falha!", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, t.getMessage());
+            }
+        });
+    }
 
 }
